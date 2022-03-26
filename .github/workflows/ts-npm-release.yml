@@ -14,29 +14,9 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-
-    # Skip release commits - prevents recursive builds
-    if: "!contains(github.event.head_commit.message, 'chore(release)')"
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '16'
-          cache: 'npm'
-
-      - run: npm install
-      - run: npm test
-      - run: npm run build
-      - run: npm run lint
+  # This workflow requires the build to be run first
 
   publish:
-    needs: build
     runs-on: ubuntu-latest
 
     steps:
