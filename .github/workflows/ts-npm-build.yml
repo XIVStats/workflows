@@ -19,7 +19,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [ 14.x, 16.x, 17.x]
+        node-version: [ 14.x, 16.x, 18.x, 19.x]
         
     # Allows PRs to write artifacts
     permissions:
@@ -59,7 +59,7 @@ jobs:
         if: success() || failure()    # run this step even if previous step failed
 
       - name: Upload
-        uses: codecov/codecov-action@v2.1.0
+        uses: codecov/codecov-action@v3.1.1
         if: success() || failure()    # run this step even if previous step failed
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
